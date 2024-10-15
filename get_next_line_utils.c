@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:37:29 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/10/15 15:27:51 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:35:19 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *str)
 	}
 	return (len);
 }
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/*char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	slen;
@@ -47,7 +47,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	return (str);
-}
+}*/
 
 char	*ft_strdup(const char *s)
 {
