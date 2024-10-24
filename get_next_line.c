@@ -6,11 +6,13 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:35:57 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/10/15 14:38:36 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:58:29 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*get_next_line(int fd)
 {
+	
 	return (0);
 }
+ 
