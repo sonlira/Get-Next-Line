@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:37:32 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/10/18 18:51:26 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:38:15 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
