@@ -6,15 +6,15 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:37:32 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/11/18 12:38:15 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:04:46 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 10000
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
 # endif
 
 # include <stdlib.h>
