@@ -6,96 +6,89 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:35:57 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/11/19 14:57:48 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:54:59 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static char	*set_line(char *line_buffer)
-{
-	char	*save;
-	ssize_t	i;
-
-	i = 0;
-	while (line_buffer[i] != '\n' && line_buffer[i] != '\0')
-		i++;
-	if (line_buffer[i] == 0 || line_buffer[1] == 0)
-		return (NULL);
-	save = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
-	if (*save == 0)
-	{
-		free(save);
-		save = NULL;
-	}
-	line_buffer[i + 1] = 0;
-	return (save);
-}
-
-static char	*fill_buffer(int fd, char *save, char *buffer)
+static char	*fill_buffer(int fd, char *buffer, char *store)
 {
 	char	*tmp;
 	ssize_t	read_bytes;
 
-	read_bytes = 1;
-	while (read_bytes > 0)
+	tmp = NULL;
+	while (1)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-			return (free(save), NULL);
-		else if (read_bytes == 0)
+		if (read_bytes < 0)
+			return (free(buffer), NULL);
+		if (read_bytes == 0)
 			break ;
-		buffer[read_bytes] = 0;
-		if (!save)
-			save = ft_strdup("");
-		tmp = save;
-		save = ft_strjoin(tmp, buffer);
-		free(tmp);
-		tmp = NULL;
+		buffer[read_bytes] = '\0';
+		if (!store)
+			store = ft_strdup("");
+		tmp = ft_strjoin(store, buffer);
+		free(store);
+		store = tmp;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	return (save);
+	free(buffer);
+	return (store);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*buffer;
+	static char	*store = NULL;
 	char		*line;
-	static char	*save;
+	char		*newline_pos;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	line = fill_buffer(fd, save, buffer);
-	free(buffer);
-	buffer = NULL;
+	line = fill_buffer(fd, buffer, store);
 	if (!line)
-		return (NULL);
-	save = set_line(line);
+		return (free(line), NULL);
+	newline_pos = ft_strchr(line, '\n');
+	if (newline_pos)
+	{
+		*newline_pos = '\0';
+		store = ft_strdup(newline_pos + 1);
+	}
+	else
+		store = NULL;
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int	fd;
-// 	char *line;
+int	main(void)
+{
+	char *line;
+	int	fd;
 
-// 	fd = open("read.txt", O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		perror("Open file filed");
-// 		return (1);
-// 	}
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%s", line);
-// 		line = get_next_line(fd);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open("big_line_nl.txt", O_RDONLY);
+
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			printf("%s\n", line);
+			free(line);
+		}
+		else
+			break ;
+	}
+	// line = get_next_linee(fd);
+	// printf("%s\n", line);
+	// free(line);
+	// line = get_next_linee(fd);
+	// printf("%s", line);
+	// free(line);
+	close(fd);
+	return (0);
+}
