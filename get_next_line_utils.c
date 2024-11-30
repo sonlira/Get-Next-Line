@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:37:29 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/11/18 12:41:22 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:26:38 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,6 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == '\0')
 		return ((char *)s + i);
 	return (NULL);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	slen;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	if (slen <= start)
-		return (ft_strdup(""));
-	if ((slen - start) < len)
-		len = slen - start;
-	str = (char *) malloc((len + 1) * 1);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s[start] && i < len)
-	{
-		str[i] = s[start];
-		i++;
-		start++;
-	}
-	str[i] = '\0';
-	return (str);
 }
 
 char	*ft_strdup(const char *s)

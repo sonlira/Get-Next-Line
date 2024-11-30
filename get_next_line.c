@@ -6,12 +6,11 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:35:57 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/11/28 21:54:59 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:25:44 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*fill_buffer(int fd, char *buffer, char *store)
 {
@@ -44,7 +43,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	static char	*store = NULL;
 	char		*line;
-	char		*newline_pos;
+	char		*line_pos;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -53,25 +52,27 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = fill_buffer(fd, buffer, store);
 	if (!line)
-		return (free(line), NULL);
-	newline_pos = ft_strchr(line, '\n');
-	if (newline_pos)
+		return (free(store), store = NULL, NULL);
+	line_pos = ft_strchr(line, '\n');
+	if (line_pos && line_pos[1] != '\0')
 	{
-		*newline_pos = '\0';
-		store = ft_strdup(newline_pos + 1);
+		store = ft_strdup(line_pos + 1);
+		line_pos[1] = '\0';
 	}
 	else
 		store = NULL;
 	return (line);
 }
-
+/*
+#include <stdio.h>
 int	main(void)
 {
-	char *line;
-	int	fd;
+	char	*line;
+	int		fd;
 
-	fd = open("big_line_nl.txt", O_RDONLY);
-
+	fd = open("read.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -83,12 +84,7 @@ int	main(void)
 		else
 			break ;
 	}
-	// line = get_next_linee(fd);
-	// printf("%s\n", line);
-	// free(line);
-	// line = get_next_linee(fd);
-	// printf("%s", line);
-	// free(line);
 	close(fd);
 	return (0);
 }
+*/
