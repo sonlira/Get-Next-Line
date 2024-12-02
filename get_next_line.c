@@ -6,7 +6,7 @@
 /*   By: abaldelo <abaldelo@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:35:57 by abaldelo          #+#    #+#             */
-/*   Updated: 2024/11/30 16:25:44 by abaldelo         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:42:18 by abaldelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*fill_buffer(int fd, char *buffer, char *store)
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*store = NULL;
+	static char	*store;
 	char		*line;
 	char		*line_pos;
 
